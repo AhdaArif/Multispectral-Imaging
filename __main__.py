@@ -1,15 +1,14 @@
-from gpiozero import OutputDevice
+from gpiozero import DigitalOutputDevice, DigitalInputDevice
 from time import sleep
 
-def setup ():
-   trigger = OutputDevice(18)
-   
+from src import shut, mount
 
-def loop ():
-   pass
+pin = DigitalOutputDevice(18)
 
-def main ():
-   setup()
-   while True: loop()
-
-if __name__=='__main__': main()
+while True:
+   sleep(3)
+   key = input('Take a picture or quit [y/n/m for mount]? > ')
+   if key=='y': shut(pin)
+   if key=='m': mount(pin)
+   elif key=='n': break
+   else: continue
